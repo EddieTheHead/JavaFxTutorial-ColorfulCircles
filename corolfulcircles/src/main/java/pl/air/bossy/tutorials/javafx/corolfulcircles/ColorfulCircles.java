@@ -43,7 +43,7 @@ public class ColorfulCircles extends Application {
 
 		Group circles = new Group();
 		for (int i = 0; i < 30; ++i) {
-			Circle c = new Circle(150, Color.web("white"));
+			Circle c = new Circle(150, Color.web("white",0.05));
 			c.setStrokeType(StrokeType.OUTSIDE);
 			c.setStroke(Color.web("white", 0.16));
 			c.setStrokeWidth(4);
