@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -33,9 +34,7 @@ public class ColorfulCircles extends Application {
 								new Stop(0.85, Color.web("#ef504c")), new Stop(1, Color.web("#f2660f")), }));
 		backGradient.widthProperty().bind(scene.widthProperty());
 		backGradient.heightProperty().bind(scene.heightProperty());
-		
-		root.getChildren().add(backGradient);
-		
+				
 		Group circles = new Group();
 		for (int i = 0; i < 30; ++i) {
 			Circle c = new Circle(150, Color.web("white"));
@@ -45,8 +44,13 @@ public class ColorfulCircles extends Application {
 			circles.getChildren().add(c);
 		}
 		circles.setEffect(new BoxBlur(10, 10, 3));
-		root.getChildren().add(circles);
 
+		Group blendModeGroup = new Group( new Group(
+				new Rectangle(scene.getWidth(),scene.getHeight(),Color.BLACK),circles),
+				backGradient);
+		backGradient.setBlendMode(BlendMode.OVERLAY);
+		root.getChildren().add(blendModeGroup);
+		
 		primaryStage.show();
 	}
 
